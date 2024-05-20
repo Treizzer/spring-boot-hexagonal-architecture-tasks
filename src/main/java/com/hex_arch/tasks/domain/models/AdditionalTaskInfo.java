@@ -8,7 +8,9 @@ import lombok.Getter;
 public class AdditionalTaskInfo {
 
     private final Long userId;
+
     private final String username;
+
     private final String userEmail;
 
 }
