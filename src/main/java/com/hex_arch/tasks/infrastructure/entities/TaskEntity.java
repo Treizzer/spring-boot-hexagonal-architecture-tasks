@@ -2,12 +2,15 @@ package com.hex_arch.tasks.infrastructure.entities;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.hex_arch.tasks.domain.models.Task;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,10 +31,19 @@ public class TaskEntity {
 
     private String description;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(nullable = false)
     private LocalDateTime creationDate;
 
     @Getter(AccessLevel.NONE)
     private Boolean completed;
+
+    // Is executed in automatically before persist the entity
+    // for first time in data base
+    @PrePersist
+    protected void onCreate() {
+        creationDate = LocalDateTime.now();
+    }
 
     public Boolean isCompleted() {
         return completed;

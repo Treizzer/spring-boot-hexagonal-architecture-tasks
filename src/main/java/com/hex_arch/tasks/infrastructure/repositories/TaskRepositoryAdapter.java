@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.hex_arch.tasks.domain.models.Task;
 import com.hex_arch.tasks.domain.ports.out.TaskRepositoryPort;
 import com.hex_arch.tasks.infrastructure.entities.TaskEntity;
 
+@Component
 public class TaskRepositoryAdapter implements TaskRepositoryPort {
 
     private final TaskRepository repository;
